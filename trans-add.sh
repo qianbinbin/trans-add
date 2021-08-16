@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-MAGNETS_FILE="$HOME/.config/transmission-daemon/trans-add.magnets"
+MAGNETS_FILE="$HOME/.config/transmission-daemon/trans-add.magnet"
 [ -n "$1" ] && MAGNETS_FILE="$1"
 
 error() {
@@ -31,12 +31,12 @@ for url in $URLS; do
   magnets=$(echo "$content" | grep "magnet:?[^[:space:]\"']*" -o)
   for magnet in $magnets; do
     # magnet:?xt=urn:btih:c12fe1c06bba254a9dc9f519b335aa7c1367a88a
-    # "?" will be treated as it is when using BRE
-    if grep -qs "$magnet" "$MAGNETS_FILE"; then
-      log "Skipping: $magnet"
+    urn=$(echo "$magnet" | grep -i "=urn:.*:[^&]*" -o | cut -c2-)
+    if grep -qs "$urn" "$MAGNETS_FILE"; then
+      log "Skipping: $urn"
       continue
     fi
-    log "Adding: $magnet"
+    log "Adding: $urn"
     transmission-remote -a "$magnet" && echo "$magnet" >>"$MAGNETS_FILE"
   done
 done

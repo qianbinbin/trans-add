@@ -17,19 +17,22 @@ https://dmhy.org/topics/rss/rss.xml?keyword=megalobox+%E6%9E%81%E5%BD%B1+1080+GB
 从文件读取 URL：
 
 ```sh
+$ cat urls.txt
+https://dmhy.org/topics/rss/rss.xml?keyword=sonny+boy+mp4+%E6%98%9F%E7%A9%BA+%E7%AE%80
+https://dmhy.org/topics/rss/rss.xml?keyword=megalobox+%E6%9E%81%E5%BD%B1+1080+GB
 $ trans-add.sh <urls.txt # cat urls.txt | trans-add.sh
 ```
 
-默认将已提交的磁力链保存在 `~/.config/transmission-daemon/trans-add.magnets`，也可手动指定：
+默认将已提交的磁力链保存在 `~/.config/transmission-daemon/trans-add.magnet`，也可手动指定：
 
 ```sh
-$ trans-add.sh magnets.txt <urls.txt
+$ trans-add.sh magnets.txt
 ```
 
 一个典型的使用：
 
 ```sh
-$ trans-add.sh <~/.config/transmission-daemon/trans-add.urls >>~/.config/transmission-daemon/trans-add.log 2>&1
+$ trans-add.sh <~/.config/transmission-daemon/trans-add.url >>~/.config/transmission-daemon/trans-add.log 2>&1
 ```
 
 添加到 cron 定时任务即可。
